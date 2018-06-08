@@ -3,6 +3,7 @@
 <html>
     <head>
 	    <title>Gerenciador de Tarefas</title>
+	    <link rel="stylesheet" href="tarefas.css" type="text/css" />
     </head>
     <body>
 	    <h1>Gerenciador de Tarefas</h1>
@@ -17,7 +18,14 @@
 	    			<input type="text" name="fone" required="true" /></br>
 	    			Email:
 	    			<input type="Email" name="email" required="true"/><br>
-	    		
+	    			Descrição:
+					<textarea name="descricao">Your desc. here...</textarea><br>
+					Data de nascimento:
+					<input type="date" name="nasc" /><br>
+					Favorito:
+					<input type="checkbox" name="fav" value="sim"><br>
+	    		</label>
+					
 	    		<input type="submit" value="Cadastrar" />
 	    	</fieldset>
 	    </form>
@@ -35,6 +43,18 @@
 	        if (isset($_GET['email'])) {
 	        	$_SESSION['lista_contato'][] = $_GET['email']; # adiciona dentro do array $_SESSION 
 	        } 
+
+	        if (isset($_GET['desc'])){
+	        	$_SESSION['lista_contato'][] = $_GET['desc'];
+	        }
+
+	        if (isset($_GET['nasc'])){
+	        	$_SESSION['lista_contato'][] = $_GET['nasc'];
+	        }
+
+	        if (isset($_GET['fav'])){
+	        	$_SESSION['lista_contato'][] = $_GET['fav'];
+	        }
 
 	        $lista_contato = array(); # define $lista_tarefas com um vetor
 

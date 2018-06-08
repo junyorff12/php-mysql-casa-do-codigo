@@ -13,8 +13,8 @@
                     Tarefa:
                     <input type="text" name="nome" />
                 </label>
-               <label>
-                Descrição (Opcional):
+                <label>
+                    Descrição (Opcional):
                     <textarea name="descricao"></textarea>
                 </label>
                 <label>
@@ -24,22 +24,19 @@
                 <fieldset>
                     <legend>Prioridade:</legend>
                     <label>
-                        <input type="radio" name="prioridade" value="baixa" checked />
-                        
+                        <input type="radio" name="prioridade" value="1" checked />
                         Baixa
-                        <input type="radio" name="prioridade" value="media" />
+                        <input type="radio" name="prioridade" value="2" />
                         Média
-                        <input type="radio" name="prioridade" value="alta" />
+                        <input type="radio" name="prioridade" value="3" />
                         Alta
                     </label>
                 </fieldset>
                 <label>
                     Tarefa concluída:
                     <input type="checkbox" name="concluida" value="sim" />
-                </label>
-                
-
-                <input type="submit" value="Cadastrar" />
+                </label>    
+                    <input type="submit" value="Cadastrar" />
             </fieldset>
         </form>
         <table>
@@ -55,10 +52,10 @@
                     <td><?php echo $tarefa['nome']; ?> </td>
                     <td><?php echo $tarefa['descricao']; ?> </td>
                     <td><?php echo $tarefa['prazo']; ?> </td>
-                    <td><?php echo $tarefa['prioridade']; ?> </td>
+                    <td><?php echo traduz_prioridade($tarefa['prioridade']); ?> </td>
                     <td><?php echo $tarefa['concluida']; ?> </td>
                 </tr>
             <?php endforeach; ?>
-    </table>
+        </table>
     </body>
 </html>

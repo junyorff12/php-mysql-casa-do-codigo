@@ -1,47 +1,32 @@
-<?php session_start(); ?>
+<?php
+session_start();
+include "banco.php";
 
-<html>
-    <head>
-	    <title>Gerenciador de Tarefas</title>
-    </head>
-    <body>
-	    <h1>Gerenciador de Tarefas</h1>
+if (isset($_GET['nome']) && $_GET['nome'] != '') {
+    $tarefa = array();
+    $tarefa['nome'] = $_GET['nome'];
+    
+    if (isset($_GET['descricao'])) {
+        $tarefa['descricao'] = $_GET['descricao'];
+    } else {
+        $tarefa['descricao'] = '';
+    }
+    if (isset($_GET['prazo'])) {
+        $tarefa['prazo'] = $_GET['prazo'];
+    } else {
+        $tarefa['prazo'] = '';
+    }
+    $tarefa['prioridade'] = $_GET['prioridade'];
+    
+    if (isset($_GET['concluida'])) {
+        $tarefa['concluida'] = $_GET['concluida'];
+    } else {
+        $tarefa['concluida'] = '';
+    }
 
-	    <form>
-	    	<fieldset>
-	    		<legend>Nova tarefa</legend>
-	    		<label>
-	    			Tarefas:
-	    			<input type="text" name="nome" />
-	    		</label>
-	    		<input type="submit" value="Cadastrar" />
-	    	</fieldset>
-	    </form>
-	    <?php
-            $lista_tarefas = array();
+    gravar_tarefa($conexao, $tarefa);
+}
 
-	        if (isset($_GET['nome'])) {
-	        	$_SESSION['lista_tarefas'][] = $_GET['nome']; # adiciona dentro do array $_SESSION 
-	        } 
+$lista_tarefas = buscar_tarefas($conexao);
 
-	        $lista_tarefas = array(); # define $lista_tarefas com um vetor
-
-	        if (isset($_SESSION['lista_tarefas'])) {
-	        	$lista_tarefas = $_SESSION['lista_tarefas'];# passa tudo que tem em $_SESSION para $lista_tarefas
-	        }
-	    ?>
-
-	    <table>
-	    	<tr>
-	    		<th>Tarefa:</th>
-	    	</tr>
-
-	    	<?php foreach ($lista_tarefas as $tarefa): ?>
-	    	    <tr>
-	    	    	<td> <?php echo $tarefa; ?> </td>
-	    	    </tr> 
-	    	<?php endforeach; ?>	
-	    </table>
-
-    </body>
-</html>
+include "template.php";
