@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "banco.php";
+include "ajudantes.php";
 
 if (isset($_GET['nome']) && $_GET['nome'] != '') {
     $tarefa = array();
@@ -12,7 +13,7 @@ if (isset($_GET['nome']) && $_GET['nome'] != '') {
         $tarefa['descricao'] = '';
     }
     if (isset($_GET['prazo'])) {
-        $tarefa['prazo'] = $_GET['prazo'];
+        $tarefa['prazo'] = traduz_data_para_banco($_GET['prazo']);
     } else {
         $tarefa['prazo'] = '';
     }
