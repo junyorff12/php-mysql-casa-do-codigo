@@ -34,7 +34,7 @@
                 </fieldset>
                 <label>
                     Tarefa concluída:
-                    <input type="checkbox" name="concluida" value="sim" />
+                    <input type="checkbox" name="concluida" value="1" />
                 </label>    
                     <input type="submit" value="Cadastrar" />
             </fieldset>
@@ -51,9 +51,20 @@
                 <tr>
                     <td><?php echo $tarefa['nome']; ?> </td>
                     <td><?php echo $tarefa['descricao']; ?> </td>
-                    <td><?php echo $tarefa['prazo']; ?> </td>
+                   
+                    <td><?php 
+
+                    if ($tarefa['prazo'] == ""){
+                        $data_exibir = "";
+                    }else{
+                        $dado = explode("-", $tarefa['prazo']);
+                        $data_exibir = "{$dado[2]}/{$dado[1]}/{$dado[0]}";
+                        echo $data_exibir; 
+                    }
+                    ?> </td>
+
                     <td><?php echo traduz_prioridade($tarefa['prioridade']); ?> </td>
-                    <td><?php echo $tarefa['concluida']; ?> </td>
+                    <td><?php echo traduz_concluida($tarefa['concluida']); ?> </td>
                 </tr>
             <?php endforeach; ?>
         </table>
