@@ -46,6 +46,7 @@
                 <th>Prazo</th>
                 <th>Prioridade</th>
                 <th>Concluída</th>
+                <th>Opcões</th>
             </tr>
             <?php foreach ($lista_tarefas as $tarefa) : ?>
                 <tr>
@@ -65,6 +66,11 @@
 
                     <td><?php echo traduz_prioridade($tarefa['prioridade']); ?> </td>
                     <td><?php echo traduz_concluida($tarefa['concluida']); ?> </td>
+                    <td> 
+                        <a href="editar.php?id= <?php echo $tarefa['id'] ?> ">
+                        Editar 
+                        </a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </table>
