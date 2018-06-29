@@ -28,7 +28,7 @@
 				<a href="editar.php?id=<?php echo $tarefa['id']; ?> ">
 					Editar
 				</a>
-				<a href="remover.php?id=<?php echo $tarefas['id']; ?> ">
+				<a href="remover.php?id=<?php echo $tarefa['id']; ?> ">
 					Remover
 				</a>
 			</td>

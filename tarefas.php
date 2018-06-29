@@ -26,8 +26,11 @@ if (isset($_GET['nome']) && $_GET['nome'] != '') {
         $tarefa['concluida'] = 0;
     }
     gravar_tarefa($conexao, $tarefa);
+    header('Location : tarefas.php');
+    die();
     
 }
+
 $lista_tarefas = buscar_tarefas($conexao);
 
 $tarefa = array(
