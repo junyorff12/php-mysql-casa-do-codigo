@@ -1,10 +1,13 @@
 
-<form>
+<form method="POST">
     <input type="hidden" name="id" value="<?php echo $tarefa['id']; ?>" />
     <fieldset>
         <legend>Nova tarefa</legend>
         <label>
             Tarefa:
+            <?php if ($tem_erros && isset($erros_validacao['nome'])) : ?>
+                <span class="erro"><?php echo $erros_validacao['nome']; ?></span>
+            <?php endif; ?>
             <input type="text" name="nome" value="<?php echo $tarefa['nome']; ?>" />
         </label>
         <label>
@@ -13,6 +16,11 @@
         </label>
         <label>
             Prazo (Opcional):
+            <?php if ($tem_erros && isset($erros_validacao['prazo'])) :?>
+                <span class="erro">
+                    <?php echo $erros_validacao['prazo']; ?>
+                </span>
+            <?php endif; ?>
             <input type="text" name="prazo" value="<?php echo traduz_data_para_exibir($tarefa['prazo']); ?>" />
         </label>
         <fieldset>

@@ -6,34 +6,60 @@ include "banco.php";
 include "ajudantes.php";
 
 $exibir_tabela = false;
+$tem_erros = false;
+$erros_validacao = array();
 
-if (isset($_GET['nome']) && $_GET['nome'] != '') {
+if (tem_post()) {
+    if(isset($_POST['nome']) && strlen($_POST['nome']) > 0){
+        $tarefa['nome'] = $_POST['nome']
+    }else{
+        $tem_erros = true;
+        $erros_validacao = 'O nome da tarefa é obrigatorio';
+    }
+
 	$tarefa = array();
 
-	$tarefa['id'] = $_GET['id'];
+	$tarefa['id'] = $_POST['id'];
 
-	$tarefa['nome'] = $_GET['nome'];
+	$tarefa['nome'] = $_POST['nome'];
 
-	isset($_GET['descricao'])
-	? $tarefa['descricao'] = $_GET['descricao']
+	isset($_POST['descricao'])
+	? $tarefa['descricao'] = $_POST['descricao']
 	: $tarefa['descricao'] = '';
 
-	isset($_GET['prazo'])
-    ? $tarefa['prazo'] = traduz_data_para_banco($_GET['prazo'])
-    : $tarefa['prazo'] = '';
+	if (isset($_POST['prazo']) && strlen($_POST['prazo']) > 0) {
+        if(valida_prazo($_POST['prazo'])){
+            $tarefa['prazo'] = $_POST['prazo'];
+        }else{
+            $tem_erros = true;
+            $erros_validacao = 'Oprazo não é um data válida!';
+        }
+    }
 
-    $tarefa['prioridade'] = $_GET['prioridade'];
+    $tarefa['prioridade'] = $_POST['prioridade'];
 
-    isset($_GET['concluida'])
+    isset($_POST['concluida'])
     ? $tarefa['concluida'] = 1
     : $tarefa['concluida'] = 0;
 
-    editar_tarefa($conexao, $tarefa);
-    header('Location : tarefas.php');
-    die;
+    if(! $tem_erros){
+        editar_tarefa($conexao, $tarefa);
+        header('Location : tarefas.php');
+        die;
+    }
 	
 }
 
 $tarefa = buscar_tarefa($conexao, $_GET['id']);
+
+$tarefa['nome'] = (isset($_POST['nome'])) ? $_POST['nome'] : $tarefa['nome'];
+
+$tarefa['descricao'] = (isset($_POST['descricao'])) ? $_POST['descricao'] : $tarefa['descricao'];
+
+$tarefa['praza'] = (isset($_POST['prazo'])) ? $_POST['prazo'] : $tarefa['prazo'];
+
+$tarefa['prioridade'] = (isset($_POST['prioridade'])) ? $_POST['prioridade'] : $tarefa['prioridade'];
+
+$tarefa['concluida'] = (isset($_POST)) ? $_POST['concluida'] : $_POST['concluida'];
 
 include "template.php";
