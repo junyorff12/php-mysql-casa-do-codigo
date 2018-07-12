@@ -11,6 +11,7 @@ $tem_erros = false;
 $erros_validacao = array();
 
 //if (isset($_POST['nome']) && $_POST['nome'] != '') {
+
 if (tem_post()){
 
     $tarefa = array();

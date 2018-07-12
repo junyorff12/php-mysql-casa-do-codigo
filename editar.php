@@ -11,7 +11,7 @@ $erros_validacao = array();
 
 if (tem_post()) {
     if(isset($_POST['nome']) && strlen($_POST['nome']) > 0){
-        $tarefa['nome'] = $_POST['nome']
+        $tarefa['nome'] = $_POST['nome'];
     }else{
         $tem_erros = true;
         $erros_validacao = 'O nome da tarefa é obrigatorio';
@@ -60,6 +60,6 @@ $tarefa['praza'] = (isset($_POST['prazo'])) ? $_POST['prazo'] : $tarefa['prazo']
 
 $tarefa['prioridade'] = (isset($_POST['prioridade'])) ? $_POST['prioridade'] : $tarefa['prioridade'];
 
-$tarefa['concluida'] = (isset($_POST)) ? $_POST['concluida'] : $_POST['concluida'];
+$tarefa['concluida'] = (isset($_POST['concluida'])) ? $_POST['concluida'] : $tarefa['concluida'];
 
 include "template.php";
