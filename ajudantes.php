@@ -1,19 +1,5 @@
 <?php
 
-function tratar_anexos($anexo)
-{
-    $padrao = '/^.+(\.pdf|\.zip)$/';
-    $resultado = preg_match($padrao, $anexo['name']);
-
-    if (! $resultado){
-        return false;
-    }
-
-    move_uploaded_file($anexo['tmp_name'], "anexos/{$anexo['name']}");
-
-    return true;
-}
-
 function tem_post()
 {
     if (count($_POST) > 0) {
@@ -21,6 +7,19 @@ function tem_post()
     }
 
     return false;
+}
+
+function tratar_anexo($anexo) {
+    $padrao = '/^.+(\.pdf$|\.zip$)$/';
+    $resultado = preg_match($padrao, $anexo['name']);
+
+    if (! $resultado) {
+        return false;
+    }
+
+    move_uploaded_file($anexo['tmp_name'], "anexos/{$anexo['name']}");
+
+    return true;
 }
 
 function validar_data($data)

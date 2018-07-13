@@ -10,7 +10,7 @@
 	<?php foreach ($lista_tarefas as $tarefa) : ?>
 		<tr>
 			<td>
-				<a href="tarefa.php?id=<?php echo $tarefa['id']; ?> ">
+				<a href="tarefa.php?id=<?php echo $tarefa['id']; ?> "> <!-- envia para a pagina de detalhes das tarefas e upload de anexos --> 
 					<?php echo $tarefa['nome']; ?>
 				</a> 
 			</td>

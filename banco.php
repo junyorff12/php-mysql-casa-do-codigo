@@ -12,6 +12,35 @@ if (mysqli_connect_errno($conexao)) {
     die();
 }
 
+function gravar_anexo($conexao, $anexo)
+{
+    $sqlGravar = "INSERT INTO anexos
+        (tarefa_id, nome, arquivo)
+        VALUES
+        (
+            {$anexo['tarefa_id']},
+            '{$anexo['nome']}',
+            '{$anexo['arquivo']}'
+        )
+    ";
+
+    mysqli_query($conexao, $sqlGravar);
+}
+
+function buscar_anexos($conexao, $tarefa_id)
+{
+    $sqlBusca = "SELECT * FROM anexos WHERE tarefa_id = {$tarefa_id}";
+    $resultado = mysqli_query($conexao, $sqlBusca);
+
+    $anexos = array();
+
+    while ($anexo = mysqli_fetch_assoc($resultado)) {
+        $anexos[] = $anexo;
+    }
+
+    return $anexos;
+}
+
 function buscar_tarefas($conexao)
 {
     $sqlBusca = 'SELECT * FROM tarefas';
