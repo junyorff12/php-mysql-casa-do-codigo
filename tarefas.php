@@ -46,6 +46,8 @@ if (tem_post()){
 
 
     $tarefa['prioridade'] = $_POST['prioridade'];
+
+    
     if (isset($_POST['concluida'])) {
         $tarefa['concluida'] = 1;
     } else {
